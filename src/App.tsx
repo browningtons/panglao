@@ -61,7 +61,9 @@ interface Activity {
 
 const MAP_LOCATIONS: MapLocation[] = [
   // BASE
-  { id: 'napaling', name: 'Napaling Reef (Base)', lat: 9.6105, lng: 123.7703, type: 'base', desc: 'Airbnb, Sardine Run & Cliff Stairs' },
+  { id: 'panglao_bnb', name: 'Panglao Airbnb (Base 1)', lat: 9.5505, lng: 123.7724, type: 'base', desc: 'First Base: Dec 28 - Jan 2. Near Alona Beach.' },
+  { id: 'napaling', name: 'Napaling Reef (Base 2)', lat: 9.6105, lng: 123.7703, type: 'base', desc: 'Second Base: Jan 2 - Jan 6. Sardine Run & Cliff Stairs.' },
+  
   // ADVENTURE
   { id: 'chocolates', name: 'Chocolate Hills', lat: 9.8297, lng: 124.1398, type: 'adventure', desc: 'ATV & Viewing Deck Complex' },
   { id: 'tarsier', name: 'Tarsier Sanctuary', lat: 9.6917, lng: 123.9536, type: 'adventure', desc: 'Corella Sanctuary (The ethical one)' },
@@ -468,6 +470,70 @@ export default function App() {
                 <p className="text-[var(--muted)] mt-1">Flights, Check-ins, and Movement.</p>
               </header>
 
+              {/* FLIGHT CARDS */}
+              <div className="grid gap-6 lg:grid-cols-2">
+                 {/* OUTBOUND CARD */}
+                 <div className="bg-white p-6 rounded-[var(--radius)] border border-[var(--border)] shadow-[var(--shadow)]">
+                    <div className="flex items-center justify-between mb-6 pb-4 border-b border-slate-100">
+                      <h3 className="font-bold text-[var(--heading-color)] flex items-center gap-2 text-lg"><Plane size={20} className="text-[var(--accent-secondary)]"/> Outbound</h3>
+                      <span className="text-xs font-bold font-mono bg-[#2CB6C0]/10 text-[var(--accent-secondary)] px-2.5 py-1 rounded">Dec 26-28</span>
+                    </div>
+                    <div className="space-y-2">
+                      <FlightLeg from="Seattle (SEA)" to="Manila (MNL) T1" flight="PR125" duration="14h 35m" departTime="9:30 PM (Dec 26)" />
+                      <FlightLeg 
+                        from="Manila (MNL) T2" to="Davao (DVO)" flight="PR2813" duration="1h 55m" 
+                        isLayover="Layover: 4h 45m (Terminal Transfer T1 -> T2)" 
+                      />
+                      <FlightLeg 
+                        from="Davao (DVO)" to="Bohol-Panglao (TAG)" flight="PR2372" duration="1h 00m" 
+                        isLayover="Layover: 1h 35m (Short Connection!)" 
+                        arriveTime="1:20 PM (Dec 28)"
+                        alert={true}
+                      />
+                      <div className="mt-4 pt-4 border-t border-slate-100">
+                        <div className="flex items-start gap-3">
+                           <div className="bg-blue-100 p-2 rounded-full text-blue-600"><MapPin size={16}/></div>
+                           <div>
+                              <div className="text-xs font-bold text-slate-500 uppercase tracking-wide">Arrival</div>
+                              <div className="font-bold text-slate-800">Check into Panglao Airbnb (First Base)</div>
+                              <div className="text-xs text-slate-500">Dec 28 - Jan 2</div>
+                           </div>
+                        </div>
+                      </div>
+                    </div>
+                 </div>
+
+                 {/* RETURN CARD */}
+                 <div className="bg-white p-6 rounded-[var(--radius)] border border-[var(--border)] shadow-[var(--shadow)]">
+                    <div className="flex items-center justify-between mb-6 pb-4 border-b border-slate-100">
+                      <h3 className="font-bold text-[var(--heading-color)] flex items-center gap-2 text-lg"><Plane size={20} className="text-[var(--accent-primary)]"/> Return</h3>
+                      <span className="text-xs font-bold font-mono bg-[#F04A00]/10 text-[var(--accent-primary)] px-2.5 py-1 rounded">Jan 6</span>
+                    </div>
+                    <div className="space-y-2">
+                      <div className="mb-4 pb-4 border-b border-slate-100">
+                        <div className="flex items-start gap-3">
+                           <div className="bg-orange-100 p-2 rounded-full text-orange-600"><MapPin size={16}/></div>
+                           <div>
+                              <div className="text-xs font-bold text-slate-500 uppercase tracking-wide">Mid-Trip Switch</div>
+                              <div className="font-bold text-slate-800">Move to Napaling Reef (Second Base)</div>
+                              <div className="text-xs text-slate-500">Jan 2 - Jan 6</div>
+                           </div>
+                        </div>
+                      </div>
+                      <FlightLeg from="Bohol-Panglao (TAG)" to="Manila (MNL) T2" flight="PR2774" duration="1h 30m" departTime="11:00 AM (Jan 6)" />
+                      <FlightLeg 
+                        from="Manila (MNL) T1" to="Vancouver (YVR)" flight="PR116" duration="11h 35m" 
+                        isLayover="Layover: 7h 50m (Terminal Transfer T2 -> T1)" 
+                        alert={true}
+                      />
+                      <FlightLeg 
+                        from="Vancouver (YVR)" to="Seattle (SEA)" flight="AS2122" duration="1h 06m" 
+                        isLayover="Layover: 3h 40m" 
+                      />
+                    </div>
+                 </div>
+              </div>
+
               {/* CHECKLIST */}
               <div className="bg-amber-50 border border-amber-100 p-6 rounded-[var(--radius)]">
                 <h4 className="font-bold text-amber-900 flex items-center gap-2 mb-4 text-lg"><CheckSquare size={20}/> Pre-Flight Checklist</h4>
@@ -505,50 +571,6 @@ export default function App() {
                         <span className="text-sm text-amber-900/80"><strong>Copies of Passport:</strong> Digital and Physical.</span>
                     </div>
                 </div>
-              </div>
-
-              {/* FLIGHT CARDS */}
-              <div className="grid gap-6 lg:grid-cols-2">
-                 {/* OUTBOUND CARD */}
-                 <div className="bg-white p-6 rounded-[var(--radius)] border border-[var(--border)] shadow-[var(--shadow)]">
-                    <div className="flex items-center justify-between mb-6 pb-4 border-b border-slate-100">
-                      <h3 className="font-bold text-[var(--heading-color)] flex items-center gap-2 text-lg"><Plane size={20} className="text-[var(--accent-secondary)]"/> Outbound</h3>
-                      <span className="text-xs font-bold font-mono bg-[#2CB6C0]/10 text-[var(--accent-secondary)] px-2.5 py-1 rounded">Dec 26-28</span>
-                    </div>
-                    <div className="space-y-2">
-                      <FlightLeg from="Seattle (SEA)" to="Manila (MNL) T1" flight="PR125" duration="14h 35m" departTime="9:30 PM (Dec 26)" />
-                      <FlightLeg 
-                        from="Manila (MNL) T2" to="Davao (DVO)" flight="PR2813" duration="1h 55m" 
-                        isLayover="Layover: 4h 45m (Terminal Transfer T1 -> T2)" 
-                      />
-                      <FlightLeg 
-                        from="Davao (DVO)" to="Bohol-Panglao (TAG)" flight="PR2372" duration="1h 00m" 
-                        isLayover="Layover: 1h 35m (Short Connection!)" 
-                        arriveTime="1:20 PM (Dec 28)"
-                        alert={true}
-                      />
-                    </div>
-                 </div>
-
-                 {/* RETURN CARD */}
-                 <div className="bg-white p-6 rounded-[var(--radius)] border border-[var(--border)] shadow-[var(--shadow)]">
-                    <div className="flex items-center justify-between mb-6 pb-4 border-b border-slate-100">
-                      <h3 className="font-bold text-[var(--heading-color)] flex items-center gap-2 text-lg"><Plane size={20} className="text-[var(--accent-primary)]"/> Return</h3>
-                      <span className="text-xs font-bold font-mono bg-[#F04A00]/10 text-[var(--accent-primary)] px-2.5 py-1 rounded">Jan 6</span>
-                    </div>
-                    <div className="space-y-2">
-                      <FlightLeg from="Bohol-Panglao (TAG)" to="Manila (MNL) T2" flight="PR2774" duration="1h 30m" departTime="11:00 AM (Jan 6)" />
-                      <FlightLeg 
-                        from="Manila (MNL) T1" to="Vancouver (YVR)" flight="PR116" duration="11h 35m" 
-                        isLayover="Layover: 7h 50m (Terminal Transfer T2 -> T1)" 
-                        alert={true}
-                      />
-                      <FlightLeg 
-                        from="Vancouver (YVR)" to="Seattle (SEA)" flight="AS2122" duration="1h 06m" 
-                        isLayover="Layover: 3h 40m" 
-                      />
-                    </div>
-                 </div>
               </div>
             </div>
           )}
