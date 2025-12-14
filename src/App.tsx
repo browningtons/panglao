@@ -4,9 +4,7 @@ import {
   Map as MapIcon, Utensils, Mountain, Anchor, 
   AlertTriangle, 
   CheckSquare, Coins, Wallet, 
-  Users, Car, Smartphone, Info,
-  Target, Crosshair, Navigation, X, ZoomIn, ZoomOut,
-  ExternalLink
+  Users, Car, Smartphone
 } from 'lucide-react';
 
 // --- TYPES ---
