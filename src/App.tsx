@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { 
   Plane, MapPin, Calendar, Gift, User, Coffee, Shield, 
-  Map as MapIcon, Utensils, Mountain, Anchor, Sunset, 
-  Droplet, Heart, AlertTriangle, ArrowRight, CloudRain, 
-  Sun, Thermometer, CheckSquare, Banknote, Coins, Wallet, 
-  Users, Clock, Car, Smartphone, ShoppingBag, Info,
+  Map as MapIcon, Utensils, Mountain, Anchor, 
+  AlertTriangle, 
+  CheckSquare, Coins, Wallet, 
+  Users, Car, Smartphone, Info,
   Target, Crosshair, Navigation, X, ZoomIn, ZoomOut,
   ExternalLink
 } from 'lucide-react';
