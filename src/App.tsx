@@ -7,8 +7,6 @@ import {
   Users, Car, Smartphone
 } from 'lucide-react';
 
-// --- TYPES ---
-
 interface MapLocation {
   id: string;
   name: string;
@@ -50,7 +48,7 @@ interface MoneyIntelSection {
 interface Activity {
   id: string;
   title: string;
-  category: 'Group' | 'Solo' | 'Chill';
+  category: 'Group' | 'Solo' | 'Chill' | 'Food';
   audience: string;     // Who
   mode: string;         // What (Guided vs Self)
   travelTime: string;   // How long to get there
@@ -60,12 +58,6 @@ interface Activity {
 }
 
 // --- DATA ---
-
-const ITINERARY_DATA: ItineraryItem[] = [
-  { date: "Fri, Dec 26", title: "Depart Seattle", time: "9:30 PM", icon: Plane, type: "travel", details: "Flight PR125. 14.5h Long Haul to MNL. Bring neck pillow & compression socks." },
-  { date: "Sun, Dec 28", title: "The Arrival Gauntlet", time: "1:20 PM", icon: MapPin, type: "travel", details: "Land in Panglao (TAG) via MNL & DVO. Check into Napaling Airbnb." },
-  { date: "Tue, Jan 6", title: "Return Journey", time: "11:00 AM", icon: Plane, type: "travel", details: "TAG -> MNL (Danger Zone Layover) -> YVR -> SEA." },
-];
 
 const MAP_LOCATIONS: MapLocation[] = [
   // BASE
@@ -99,15 +91,24 @@ const ACTIVITY_BANK: Activity[] = [
   { id: 'tarsier', title: "Tarsier Sanctuary", category: "Group", audience: "Family", mode: "Guided Walk", travelTime: "45 min (Van)", duration: "45 Mins", desc: "Corella sanctuary (the ethical one). Short walk, strict silence required.", cost: "₱150/pax" },
   { id: 'loboc', title: "Loboc River Lunch", category: "Group", audience: "Family/Group", mode: "River Cruise", travelTime: "60 min (Van)", duration: "2 Hours", desc: "Buffet on a floating raft. Very touristy but relaxing and classic.", cost: "₱850/pax" },
   { id: 'balicasag', title: "Balicasag Turtles", category: "Group", audience: "Everyone", mode: "Boat Charter", travelTime: "45 min (Boat)", duration: "Half Day", desc: "Marine sanctuary with guaranteed sea turtles. Snorkel gear required.", cost: "₱3,000/boat" },
-  
+  { id: 'virgin', title: "Virgin Island", category: "Group", audience: "Everyone", mode: "Island Hop", travelTime: "10 min (from Balicasag)", duration: "1 Hour", desc: "Sandbar known for food stalls (sea urchin, fried bananas) and shallow waters.", cost: "Free" },
+
   // SOLO
   { id: 'alicia', title: "Alicia Ridge Run", category: "Solo", audience: "Solo/Fit", mode: "Extreme Hike", travelTime: "2.5 Hours (Scooter)", duration: "Full Day", desc: "The Binabaje Hills. Epic, technical trail running. Jagged green ridges.", cost: "₱300 guide" },
   { id: 'lamanoc', title: "Lamanoc Mystical Tour", category: "Solo", audience: "Solo/Explorer", mode: "Guided History", travelTime: "2.5 Hours (Scooter)", duration: "3 Hours", desc: "The 'Island of Shaman' in Anda. Caves, red hematite paintings, boat coffins.", cost: "₱500/pax" },
   
   // CHILL/DINING
   { id: 'northzen', title: "North Zen Sunset", category: "Chill", audience: "Couples/Chill", mode: "Walk", travelTime: "15 min (Trike)", duration: "2 Hours", desc: "500m Bamboo boardwalk through mangroves. Best sunset spot on the island. Consumable entrance fee.", cost: "₱198/pax" },
-  { id: 'cave', title: "Hinagdanan Cave", category: "Chill", audience: "Everyone", mode: "Self-Guided", travelTime: "15 min (Trike)", duration: "1 Hour", desc: "Limestone cave with a swimmable lagoon. Can get crowded.", cost: "₱50/pax" },
-  { id: 'bee', title: "Bohol Bee Farm", category: "Chill", audience: "Dinner Group", mode: "Dining", travelTime: "20 min (Trike)", duration: "2 Hours", desc: "Organic food on a cliff. Great for sunset dinner. Try the spicy flower salad.", cost: "₱$$" },
+  { id: 'hinagdanan', title: "Hinagdanan Cave", category: "Chill", audience: "Everyone", mode: "Self-Guided", travelTime: "15 min (Trike)", duration: "1 Hour", desc: "Limestone cave with a swimmable lagoon. Can get crowded.", cost: "₱50/pax" },
+  { id: 'molave', title: "Molave Cliff Resort", category: "Chill", audience: "Everyone", mode: "Relaxation", travelTime: "2 min (Walk)", duration: "Unlimited", desc: "Neighboring resort with a diving board and nice ocean access. Good for a lazy afternoon.", cost: "₱100/entry" },
+  { id: 'dauis', title: "Dauis Church", category: "Chill", audience: "History Buffs", mode: "Sightseeing", travelTime: "20 min (Trike)", duration: "30 Mins", desc: "Historic Spanish-era church with a miraculous fresh water well inside near the altar.", cost: "Donation" },
+
+  // FOOD
+  { id: 'beefarm', title: "Bohol Bee Farm", category: "Food", audience: "Dinner Group", mode: "Dining", travelTime: "20 min (Trike)", duration: "2 Hours", desc: "Organic food on a cliff. Great for sunset dinner. Try the spicy flower salad.", cost: "₱$$" },
+  { id: 'ubeco', title: "Ubeco", category: "Food", audience: "Foodies", mode: "Dining", travelTime: "10 min (Trike)", duration: "1.5 Hours", desc: "Top-rated fusion comfort food. Famous for their fried chicken and sandwiches.", cost: "₱$$" },
+  { id: 'mist', title: "Mist", category: "Food", audience: "Instagram", mode: "Cafe/Dining", travelTime: "15 min (Trike)", duration: "1.5 Hours", desc: "Very aesthetic, jungle-themed cafe. Good coffee and international menu.", cost: "₱$$" },
+  { id: 'barwoo', title: "Barwoo", category: "Food", audience: "Dinner", mode: "Dining", travelTime: "15 min (Trike)", duration: "1.5 Hours", desc: "Popular Korean bistro. The pork ribs and spicy noodles are hits. Usually a wait.", cost: "₱$$" },
+  { id: 'alona', title: "Alona Beach", category: "Food", audience: "Party/Nightlife", mode: "Hub", travelTime: "15 min (Trike)", duration: "Open", desc: "The main tourist strip. Bars, fire dancers, and restaurants on the sand.", cost: "₱$-$$$" },
 ];
 
 const WINGMAN_SECTIONS: WingmanSection[] = [
@@ -281,9 +282,11 @@ interface FlightLegProps {
   duration: string;
   alert?: boolean;
   isLayover?: string;
+  departTime?: string;
+  arriveTime?: string;
 }
 
-function FlightLeg({ from, to, flight, duration, alert, isLayover }: FlightLegProps) {
+function FlightLeg({ from, to, flight, duration, alert, isLayover, departTime, arriveTime }: FlightLegProps) {
   return (
     <div className="relative pl-6 pb-6 border-l-2 border-slate-200 last:border-0 last:pb-0">
       <div className={`absolute -left-[9px] top-0 w-4 h-4 rounded-full border-2 ${alert ? 'bg-red-100 border-red-500' : 'bg-white border-[var(--accent-secondary)]'}`}></div>
@@ -297,6 +300,13 @@ function FlightLeg({ from, to, flight, duration, alert, isLayover }: FlightLegPr
           <div className="text-xs font-bold text-[var(--accent-primary)]">{duration}</div>
         </div>
       </div>
+      
+      {(departTime || arriveTime) && (
+        <div className="flex justify-between text-xs mt-1.5 text-slate-600 bg-slate-50 p-1.5 rounded">
+            {departTime && <span>Dep: <strong>{departTime}</strong></span>}
+            {arriveTime && <span>Arr: <strong>{arriveTime}</strong></span>}
+        </div>
+      )}
 
       {isLayover && (
         <div className={`mt-2 text-xs p-2 rounded ${alert ? 'bg-red-50 text-red-700 border border-red-100' : 'bg-slate-50 text-slate-600 border border-slate-100'}`}>
@@ -458,48 +468,41 @@ export default function App() {
                 <p className="text-[var(--muted)] mt-1">Flights, Check-ins, and Movement.</p>
               </header>
 
-              {/* Trip Timeline (uses ITINERARY_DATA) */}
-                <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-4">
-                  <h3 className="font-bold text-slate-800 mb-3">Trip Timeline</h3>
-
-                  <div className="space-y-3">
-                    {ITINERARY_DATA.map((item, index) => {
-                      const Icon = item.icon;
-                      return (
-                        <div key={index} className="flex gap-3 items-start">
-                          <Icon className="h-5 w-5 text-slate-500 mt-1" />
-                          <div>
-                            <div className="text-xs text-slate-500">
-                              {item.date} • {item.time}
-                            </div>
-                            <div className="font-semibold text-slate-800">
-                              {item.title}
-                            </div>
-                            <div className="text-sm text-slate-600">
-                              {item.details}
-                            </div>
-                          </div>
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-
               {/* CHECKLIST */}
               <div className="bg-amber-50 border border-amber-100 p-6 rounded-[var(--radius)]">
                 <h4 className="font-bold text-amber-900 flex items-center gap-2 mb-4 text-lg"><CheckSquare size={20}/> Pre-Flight Checklist</h4>
                 <div className="grid sm:grid-cols-2 gap-4">
                     <div className="flex items-start gap-3 bg-white/50 p-2 rounded-lg">
                         <input type="checkbox" className="mt-1 w-4 h-4 accent-[var(--accent-primary)]" />
-                        <span className="text-sm text-amber-900/80"><strong>eTravel Registration:</strong> Mandatory for Philippines entry. Register at <a href="https://etravel.gov.ph" target="_blank" className="underline decoration-[var(--accent-primary)] font-bold text-amber-900">etravel.gov.ph</a> within 72h of flight.</span>
+                        <span className="text-sm text-amber-900/80"><strong>eTravel Registration:</strong> Mandatory. Register at <a href="https://etravel.gov.ph" target="_blank" className="underline decoration-[var(--accent-primary)] font-bold text-amber-900">etravel.gov.ph</a> within 72h.</span>
                     </div>
                     <div className="flex items-start gap-3 bg-white/50 p-2 rounded-lg">
                         <input type="checkbox" className="mt-1 w-4 h-4 accent-[var(--accent-primary)]" />
-                        <span className="text-sm text-amber-900/80"><strong>Download Grab App:</strong> Link your credit card before leaving US.</span>
+                        <span className="text-sm text-amber-900/80"><strong>Grab App:</strong> Link your credit card before leaving US.</span>
                     </div>
                     <div className="flex items-start gap-3 bg-white/50 p-2 rounded-lg">
                         <input type="checkbox" className="mt-1 w-4 h-4 accent-[var(--accent-primary)]" />
-                        <span className="text-sm text-amber-900/80"><strong>Pasalubong Packed?</strong> Chocolates for kids, Whisky/Perfume for adults.</span>
+                        <span className="text-sm text-amber-900/80"><strong>Pasalubong:</strong> Chocolates & Whisky for the fam.</span>
+                    </div>
+                    <div className="flex items-start gap-3 bg-white/50 p-2 rounded-lg">
+                        <input type="checkbox" className="mt-1 w-4 h-4 accent-[var(--accent-primary)]" />
+                        <span className="text-sm text-amber-900/80"><strong>Reef-Safe Sunscreen:</strong> Zinc oxide only for marine sanctuaries.</span>
+                    </div>
+                    <div className="flex items-start gap-3 bg-white/50 p-2 rounded-lg">
+                        <input type="checkbox" className="mt-1 w-4 h-4 accent-[var(--accent-primary)]" />
+                        <span className="text-sm text-amber-900/80"><strong>Dry Bag:</strong> Essential for island hopping & bangka rides.</span>
+                    </div>
+                    <div className="flex items-start gap-3 bg-white/50 p-2 rounded-lg">
+                        <input type="checkbox" className="mt-1 w-4 h-4 accent-[var(--accent-primary)]" />
+                        <span className="text-sm text-amber-900/80"><strong>Power Bank:</strong> 10,000mAh+ for long travel days.</span>
+                    </div>
+                    <div className="flex items-start gap-3 bg-white/50 p-2 rounded-lg">
+                        <input type="checkbox" className="mt-1 w-4 h-4 accent-[var(--accent-primary)]" />
+                        <span className="text-sm text-amber-900/80"><strong>Water Shoes:</strong> For rocky shores and sea urchins.</span>
+                    </div>
+                    <div className="flex items-start gap-3 bg-white/50 p-2 rounded-lg">
+                        <input type="checkbox" className="mt-1 w-4 h-4 accent-[var(--accent-primary)]" />
+                        <span className="text-sm text-amber-900/80"><strong>Copies of Passport:</strong> Digital and Physical.</span>
                     </div>
                 </div>
               </div>
@@ -513,14 +516,15 @@ export default function App() {
                       <span className="text-xs font-bold font-mono bg-[#2CB6C0]/10 text-[var(--accent-secondary)] px-2.5 py-1 rounded">Dec 26-28</span>
                     </div>
                     <div className="space-y-2">
-                      <FlightLeg from="SEA" to="MNL" flight="PR125" duration="14h 35m" />
+                      <FlightLeg from="Seattle (SEA)" to="Manila (MNL) T1" flight="PR125" duration="14h 35m" departTime="9:30 PM (Dec 26)" />
                       <FlightLeg 
-                        from="MNL (T1)" to="DVO" flight="PR2813" duration="1h 55m" 
-                        isLayover="Layover: 4h 45m (Change Terminals T1->T2)" 
+                        from="Manila (MNL) T2" to="Davao (DVO)" flight="PR2813" duration="1h 55m" 
+                        isLayover="Layover: 4h 45m (Terminal Transfer T1 -> T2)" 
                       />
                       <FlightLeg 
-                        from="DVO" to="TAG" flight="PR2372" duration="1h 00m" 
+                        from="Davao (DVO)" to="Bohol-Panglao (TAG)" flight="PR2372" duration="1h 00m" 
                         isLayover="Layover: 1h 35m (Short Connection!)" 
+                        arriveTime="1:20 PM (Dec 28)"
                         alert={true}
                       />
                     </div>
@@ -533,14 +537,14 @@ export default function App() {
                       <span className="text-xs font-bold font-mono bg-[#F04A00]/10 text-[var(--accent-primary)] px-2.5 py-1 rounded">Jan 6</span>
                     </div>
                     <div className="space-y-2">
-                      <FlightLeg from="TAG" to="MNL (T2)" flight="PR2774" duration="1h 30m" />
+                      <FlightLeg from="Bohol-Panglao (TAG)" to="Manila (MNL) T2" flight="PR2774" duration="1h 30m" departTime="11:00 AM (Jan 6)" />
                       <FlightLeg 
-                        from="MNL (T1)" to="YVR" flight="PR116" duration="11h 35m" 
-                        isLayover="Layover: 7h 50m (The Danger Zone)" 
+                        from="Manila (MNL) T1" to="Vancouver (YVR)" flight="PR116" duration="11h 35m" 
+                        isLayover="Layover: 7h 50m (Terminal Transfer T2 -> T1)" 
                         alert={true}
                       />
                       <FlightLeg 
-                        from="YVR" to="SEA" flight="AS2122" duration="1h 06m" 
+                        from="Vancouver (YVR)" to="Seattle (SEA)" flight="AS2122" duration="1h 06m" 
                         isLayover="Layover: 3h 40m" 
                       />
                     </div>
@@ -584,10 +588,22 @@ export default function App() {
               {/* SECTION: CHILL */}
               <section>
                  <h3 className="flex items-center gap-2 text-xl font-bold text-[var(--heading-color)] mb-4 border-b border-slate-200 pb-2">
-                    <Coffee className="text-[var(--accent-primary)]" size={24}/> Chill & Dining
+                    <Coffee className="text-[var(--accent-primary)]" size={24}/> Chill & Recovery
                  </h3>
                  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
                     {ACTIVITY_BANK.filter(a => a.category === 'Chill').map(activity => (
+                       <DetailActivityCard key={activity.id} activity={activity} />
+                    ))}
+                 </div>
+              </section>
+
+              {/* SECTION: FOOD */}
+              <section>
+                 <h3 className="flex items-center gap-2 text-xl font-bold text-[var(--heading-color)] mb-4 border-b border-slate-200 pb-2">
+                    <Utensils className="text-[#F04A00]" size={24}/> Refuel (Food & Dining)
+                 </h3>
+                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+                    {ACTIVITY_BANK.filter(a => a.category === 'Food').map(activity => (
                        <DetailActivityCard key={activity.id} activity={activity} />
                     ))}
                  </div>
