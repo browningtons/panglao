@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { 
   Plane, Calendar, Gift, User, Coffee, Shield, 
   Map as MapIcon, Utensils, Mountain, Anchor, 
-  AlertTriangle, 
+  AlertTriangle, MapPin,
   CheckSquare, Coins, Wallet, 
   Users, Car, Smartphone
 } from 'lucide-react';
