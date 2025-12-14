@@ -387,7 +387,6 @@ export default function App() {
   };
 
   return (
-  <div>
     <div className="min-h-screen bg-slate-50 font-sans text-slate-900">
       
       {/* SIDEBAR (Desktop Fixed) */}
@@ -444,6 +443,33 @@ export default function App() {
                 <p className="text-slate-500">Mix and match the days.</p>
               </header>
 
+              {/* Trip Timeline (uses ITINERARY_DATA) */}
+                <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-4">
+                  <h3 className="font-bold text-slate-800 mb-3">Trip Timeline</h3>
+
+                  <div className="space-y-3">
+                    {ITINERARY_DATA.map((item, index) => {
+                      const Icon = item.icon;
+                      return (
+                        <div key={index} className="flex gap-3 items-start">
+                          <Icon className="h-5 w-5 text-slate-500 mt-1" />
+                          <div>
+                            <div className="text-xs text-slate-500">
+                              {item.date} • {item.time}
+                            </div>
+                            <div className="font-semibold text-slate-800">
+                              {item.title}
+                            </div>
+                            <div className="text-sm text-slate-600">
+                              {item.details}
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+                
               {/* DATE SELECTOR */}
               <div className="flex overflow-x-auto pb-4 gap-2 no-scrollbar">
                 {DAYS.map(day => (
