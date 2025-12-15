@@ -380,7 +380,13 @@ export default function App() {
       {/* SIDEBAR (Desktop Fixed) */}
       <aside className="hidden md:flex md:w-72 md:flex-col md:bg-white md:border-r md:border-[var(--border)] z-50 shadow-sm flex-shrink-0 h-full overflow-y-auto">
         <div className="flex items-center gap-3 p-8 border-b border-[var(--border)]">
-          <div className="bg-[var(--heading-color)] text-white p-2.5 rounded-xl shadow-lg shadow-blue-900/20"><Plane size={24} /></div>
+          <div className="bg-blue-600 p-2 rounded-xl shadow-sm">
+            <img
+              src="/bohol-icon.png"
+              alt="Bohol Trip Icon"
+              className="h-5 w-5"
+            />
+          </div>
           <div>
             <h1 className="font-bold text-xl text-[var(--heading-color)] tracking-tight">Bohol 2026</h1>
             <p className="text-xs font-medium text-[var(--accent-secondary)] uppercase tracking-wider">Brown Brothers Trip</p>
