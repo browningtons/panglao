@@ -379,13 +379,11 @@ export default function App() {
       
       {/* SIDEBAR (Desktop Fixed) */}
       <aside className="hidden md:flex md:w-72 md:flex-col md:bg-white md:border-r md:border-[var(--border)] z-50 shadow-sm flex-shrink-0 h-full overflow-y-auto">
-      <div className="flex items-center gap-3 p-6 border-b border-[var(--border)]">
         <img
           src={`${import.meta.env.BASE_URL}bohol-icon.png`}
           alt="Bohol 2026 Icon"
-          className="h-10 w-10"
+          className="h-11 w-11 drop-shadow-md"
         />
-          </div>
             <h1 className="font-bold text-xl text-[var(--heading-color)] tracking-tight">Bohol 2026</h1>
             <p className="text-xs font-medium text-[var(--accent-secondary)] uppercase tracking-wider">Brown Brothers Trip</p>
           </div>
