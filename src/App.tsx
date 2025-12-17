@@ -1,12 +1,9 @@
 import React, { useState } from 'react';
 import { 
   Plane, MapPin, Calendar, Gift, User, Coffee, Shield, 
-  Map as MapIcon, Utensils, Mountain, Anchor, Sunset, 
-  Droplet, Heart, AlertTriangle, ArrowRight, CloudRain, 
-  Sun, Thermometer, CheckSquare, Banknote, Coins, Wallet, 
-  Users, Clock, Car, Smartphone, ShoppingBag, Info,
-  Target, Crosshair, Navigation, X, ZoomIn, ZoomOut,
-  ExternalLink
+  Map as MapIcon, Utensils, Mountain, Anchor, 
+  AlertTriangle, CheckSquare, Coins, Wallet, 
+  Users, Car, Smartphone
 } from 'lucide-react';
 
 // --- TYPES ---
@@ -20,14 +17,14 @@ interface MapLocation {
   desc: string;
 }
 
-interface ItineraryItem {
-  date: string;
-  title: string;
-  time: string;
-  icon: React.ElementType;
-  type: 'travel' | 'activity';
-  details: string;
-}
+// interface ItineraryItem {
+//   date: string;
+//   title: string;
+//   time: string;
+//   icon: React.ElementType;
+//   type: 'travel' | 'activity';
+//   details: string;
+// }
 
 interface WingmanSection {
   id: string;
@@ -62,6 +59,12 @@ interface Activity {
 }
 
 // --- DATA ---
+
+const ITINERARY_DATA: ItineraryItem[] = [
+  { date: "Fri, Dec 26", title: "Depart Salt Lake City", time: "12:32 PM", icon: Plane, type: "travel", details: "Frontier F9 4987 to SEA. Long layover before the big haul to MNL. Bring neck pillow." },
+  { date: "Sun, Dec 28", title: "The Arrival Gauntlet", time: "1:20 PM", icon: MapPin, type: "travel", details: "Land in Panglao (TAG) via MNL & DVO. Check into Napaling Airbnb." },
+  { date: "Tue, Jan 6", title: "Return Journey", time: "11:00 AM", icon: Plane, type: "travel", details: "TAG -> MNL (Danger Zone Layover) -> YVR -> SEA." },
+];
 
 const MAP_LOCATIONS: MapLocation[] = [
   // BASE
@@ -492,25 +495,34 @@ export default function App() {
                     </div>
                     <div className="space-y-2">
                       <FlightLeg 
-                        from="Domestic Origin" to="Seattle (SEA)" 
-                        flight="Frontier F9 1234" 
-                        duration="2h 30m" 
-                        departTime="4:00 PM (Dec 26)"
+                        from="Salt Lake City (SLC)" to="Seattle (SEA)" 
+                        flight="Frontier F9 4987" 
+                        duration="1h 22m" 
+                        departTime="12:32 PM (Dec 26)"
+                        arriveTime="1:54 PM (Dec 26)"
                         traveler="Paul Only"
                       />
                       <FlightLeg 
                         from="Seattle (SEA)" to="Manila (MNL) T1" 
-                        flight="PR125" 
+                        flight="PR 125" 
                         duration="14h 35m" 
                         departTime="9:30 PM (Dec 26)" 
-                        isLayover="Layover: 4h 45m (Terminal Transfer T1 -> T2)"
+                        arriveTime="4:05 AM (Dec 28)"
+                        isLayover="Layover: 7h 36m (in SEA) + Terminal Transfer T1 -> T2 (in MNL)"
                       />
                       <FlightLeg 
-                        from="Manila (MNL) T2" to="Davao (DVO)" flight="PR2813" duration="1h 55m" 
+                        from="Manila (MNL) T2" to="Davao (DVO)" 
+                        flight="PR 2813" 
+                        duration="1h 55m" 
+                        departTime="8:50 AM (Dec 28)"
+                        arriveTime="10:45 AM (Dec 28)"
                       />
                       <FlightLeg 
-                        from="Davao (DVO)" to="Bohol-Panglao (TAG)" flight="PR2372" duration="1h 00m" 
+                        from="Davao (DVO)" to="Bohol-Panglao (TAG)" 
+                        flight="PR 2372" 
+                        duration="1h 00m" 
                         isLayover="Layover: 1h 35m (Short Connection!)" 
+                        departTime="12:20 PM (Dec 28)"
                         arriveTime="1:20 PM (Dec 28)"
                         alert={true}
                       />
@@ -544,21 +556,36 @@ export default function App() {
                            </div>
                         </div>
                       </div>
-                      <FlightLeg from="Bohol-Panglao (TAG)" to="Manila (MNL) T2" flight="PR2774" duration="1h 30m" departTime="11:00 AM (Jan 6)" />
                       <FlightLeg 
-                        from="Manila (MNL) T1" to="Vancouver (YVR)" flight="PR116" duration="11h 35m" 
+                        from="Bohol-Panglao (TAG)" to="Manila (MNL) T2" 
+                        flight="PR 2774" 
+                        duration="1h 30m" 
+                        departTime="11:00 AM (Jan 6)" 
+                        arriveTime="12:30 PM (Jan 6)"
+                      />
+                      <FlightLeg 
+                        from="Manila (MNL) T1" to="Vancouver (YVR) M" 
+                        flight="PR 116" 
+                        duration="11h 35m" 
                         isLayover="Layover: 7h 50m (Terminal Transfer T2 -> T1)" 
+                        departTime="8:20 PM (Jan 6)"
+                        arriveTime="3:55 PM (Jan 6)"
                         alert={true}
                       />
                       <FlightLeg 
-                        from="Vancouver (YVR)" to="Seattle (SEA)" flight="AS2122" duration="1h 06m" 
+                        from="Vancouver (YVR)" to="Seattle (SEA)" 
+                        flight="AS 2122" 
+                        duration="1h 06m" 
                         isLayover="Layover: 3h 40m" 
+                        departTime="7:35 PM (Jan 6)"
+                        arriveTime="8:41 PM (Jan 6)"
                       />
                       <FlightLeg 
-                        from="Seattle (SEA)" to="Home" 
-                        flight="Delta DL 5678" 
-                        duration="4h 15m" 
-                        departTime="8:00 AM (Jan 7)"
+                        from="Seattle (SEA)" to="Salt Lake City (SLC)" 
+                        flight="Delta DL 1265" 
+                        duration="2h 02m" 
+                        departTime="11:25 AM (Jan 7)"
+                        arriveTime="2:27 PM (Jan 7)"
                         traveler="Paul Only"
                       />
                     </div>
