@@ -381,9 +381,9 @@ export default function App() {
       <aside className="hidden md:flex md:w-72 md:flex-col md:bg-white md:border-r md:border-[var(--border)] z-50 shadow-sm flex-shrink-0 h-full overflow-y-auto">
         <div className="flex items-center gap-3 p-8 border-b border-[var(--border)]">
           <img
-            src="/panglao-icon.png"
+            src={`${import.meta.env.BASE_URL}panglao-icon.png`}
             alt="Panglao"
-            className="h-12 w-12 transition-transform hover:scale-105"
+            className="h-10 w-10"
           />
           <div>
             <h1 className="font-bold text-xl text-[var(--heading-color)] tracking-tight">Panglao 2026</h1>
@@ -392,7 +392,6 @@ export default function App() {
             </p>
           </div>
         </div>
-
         <nav className="flex-1 p-6 space-y-2">
           {['itinerary', 'activities', 'culture', 'map'].map((tab) => (
             <React.Fragment key={tab}>
@@ -457,13 +456,12 @@ export default function App() {
           <header className="md:hidden bg-white/80 backdrop-blur-md p-4 border-b border-[var(--border)] z-30 flex items-center justify-between flex-shrink-0">
             <div className="flex items-center gap-3">
               <img
-                src="/panglao-icon.png"
+                src={`${import.meta.env.BASE_URL}panglao-icon.png`}
                 alt="Panglao"
                 className="h-10 w-10"
               />
               <div className="font-bold text-[var(--heading-color)]">Panglao 2026</div>
             </div>
-
             <div className="bg-[var(--accent-primary)] text-white px-3 py-1.5 rounded-full text-xs font-bold shadow-lg shadow-orange-500/20">
               {daysLeft} Days
             </div>
@@ -828,19 +826,10 @@ export default function App() {
                   : 'text-slate-400'
               }`}
             >
-              {tab === 'itinerary' ? (
-                <img
-                  src="/panglao-icon.png"
-                  alt="Panglao"
-                  className="h-6 w-6"
-                />
-              ) : tab === 'activities' ? (
-                <Calendar size={20} />
-              ) : tab === 'culture' ? (
-                <Gift size={20} />
-              ) : (
-                <MapIcon size={20} />
-              )}
+              {tab === 'itinerary' && <Plane size={20} />}
+              {tab === 'activities' && <Calendar size={20} />}
+              {tab === 'culture' && <Gift size={20} />}
+              {tab === 'map' && <MapIcon size={20} />}
 
               <span className="text-[9px] font-bold mt-1 capitalize tracking-tight">
                 {tab === 'culture' ? 'Intel' : tab}
